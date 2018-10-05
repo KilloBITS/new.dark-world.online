@@ -56,7 +56,8 @@ var Game = {
       GM.append(texture_global);
       $("body").append(GMC);
       $(".GlobalMsgContainer").show();
-      $(".NPC_DIALOGS").hide();
+      $(".NPC_DIALOGS,.NPC_IMAGE").hide();
+
 
       if(t !== undefined, t > 0){
         setTimeout(function(){
@@ -151,6 +152,13 @@ var Game = {
           $(".NPC_OTVET").append(span);
         }
         $('.NPC_load').hide();
+
+        $("#NPC_ART").css({
+          "background-image":"url(../../../data/NPC/image/"+d.art+".png)"
+        });
+
+
+        $(".NPC_IMAGE").fadeIn(250);
         console.log(d);
       }else{
         Game.GlobalMessage(d)

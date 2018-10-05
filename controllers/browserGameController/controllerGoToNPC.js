@@ -15,7 +15,7 @@ router.post('/doNPCGo', function(req, res){
           console.log(resultsNPC)
           //Отправляем ответ
           try{
-            res.send({code:500, dlg: resultsNPC[0].d1, otv: resultsNPC[0].o1});
+            res.send({code:500, art: resultsNPC[0].art ,dlg: resultsNPC[0].d1, otv: resultsNPC[0].o1});
           }catch(e){
             console.log(e)
             res.send({code:450, error: "NPC dialog ERROR :(", author: 'SYSTEM'});
