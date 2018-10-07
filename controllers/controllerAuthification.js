@@ -31,7 +31,7 @@ var AuthController = {
   },
   setSession: function(a, b, c){  //a - Ник; b - uID; c - AuthKey (Создание сессии)
     mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-      var db = client.db("UsersData");
+      var db = client.db("DarkWorld");
       var collection = db.collection("Session");
 
       if(err) return console.log(err);
@@ -49,8 +49,8 @@ var AuthController = {
   },
   authStructure: function(req, res, next){ //Функция авторизации
     mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-      var db = client.db("UsersData");
-      var collection = db.collection("users");
+      var db = client.db("DarkWorld");
+      var collection = db.collection("Users");
 
       if(err) return console.log(err);
       let userLogin = req.body.login;

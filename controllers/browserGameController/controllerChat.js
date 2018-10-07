@@ -20,7 +20,7 @@ io.sockets.on('connection', function (client) {
         client.ak = data.AuthKEY;
 
         mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
-          clientDB.db("GameProcess").collection("UserLocationsData").updateOne({ userNick: data.nickName },{ $set: {online: true}  });
+          clientDB.db("DarkWorld").collection("UserLocationsData").updateOne({ userNick: data.nickName },{ $set: {online: true}  });
         });
 
         if(global.onlineUsers.indexOf(data.nickName) === -1){
@@ -30,7 +30,7 @@ io.sockets.on('connection', function (client) {
         client.join('mainChat');
         client.join('ShopChat');
         mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
-            clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
+            clientDB.db("DarkWorld").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
               client.join("loc"+reslocLen[0].userLocation);
             });
         });
@@ -43,9 +43,9 @@ io.sockets.on('connection', function (client) {
 
     client.on('message', function (MD) { //функция отправки сообщений
       mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientMDB){
-        var db = clientMDB.db("UsersData");
+        var db = clientMDB.db("DarkWorld");
         var collection = db.collection("Session"),
-            collection2 = db.collection("users");
+            collection2 = db.collection("Users");
 
         collection.find({c:MD.ak}).toArray(function(err, results){
             collection2.find({nick: results[0].a}).toArray(function(err, results2){
@@ -77,7 +77,7 @@ io.sockets.on('connection', function (client) {
 
     client.on('ULL', function(loc){ //подключение к чату
       mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientdb){
-          clientdb.db("GameProcess").collection("UserLocationsData").find({userLocation: loc.myLoc, online: true}).toArray(function(err, reslocLen){
+          clientdb.db("DarkWorld").collection("UserLocationsData").find({userLocation: loc.myLoc, online: true}).toArray(function(err, reslocLen){
             io.sockets.in("loc"+loc.myLoc).emit('ULL', reslocLen)
             // client.emit('ULL', reslocLen);
           });
@@ -90,7 +90,7 @@ io.sockets.on('connection', function (client) {
       if( index !== -1 ){
         global.onlineUsers.splice(index, 1);
         mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
-          clientDB.db("GameProcess").collection("UserLocationsData").updateOne({ userNick: client.username },{ $set: {online: false}  });
+          clientDB.db("DarkWorld").collection("UserLocationsData").updateOne({ userNick: client.username },{ $set: {online: false}  });
         });
       }
     });

@@ -30,8 +30,8 @@ var registrations = function(req, res, next)  {
   let userNEW = req.body.data;
   // res.send('{"code":500, "message":"Регистрация временно недоступна, следите за новостями!"}');
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-    var db = client.db("UsersData");
-    var collection = db.collection("users");
+    var db = client.db("DarkWorld");
+    var collection = db.collection("Users");
     if(err) return console.log(err);
 
     collection.find({nick:userNEW.nick}).toArray(function(err, results){
@@ -80,21 +80,21 @@ var registrations = function(req, res, next)  {
 
         collection.insertOne(userDATA);
 
-        client.db("UsersData").collection("users").find({nick:userNEW.nick}).toArray(function(err, results){
+        client.db("DarkWorld").collection("Users").find({nick:userNEW.nick}).toArray(function(err, results){
           let NewUserGame = {
             userID: results[0]._id.toString(),
             userLocation: 8,
             userRegion: 1,
             userNick: userNEW.nick
           }
-          client.db("GameProcess").collection("UserLocationsData").insertOne(NewUserGame);
+          client.db("DarkWorld").collection("UserLocationsData").insertOne(NewUserGame);
         });
 
         res.send('{"code":500, "message":"Вы успешно зарегистрированы.<br>Сообщение с кодом подтверждения отправленно вам на електронную почту!"}');
 
-          var GameData = client.db("locations");
+          var GameData = client.db("DarkWorld");
 
-          var loc = GameData.collection("locations");
+          var loc = GameData.collection("Locations");
           var npc  = GameData.collection("NPC");
 
           if(err) return console.log(err);

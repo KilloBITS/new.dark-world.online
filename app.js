@@ -64,9 +64,9 @@ app.listen(8000, function(){
   const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-    var GameData = client.db("locations");
+    var GameData = client.db("DarkWorld");
 
-    var loc = GameData.collection("locations");
+    var loc = GameData.collection("Locations");
     var npc  = GameData.collection("NPC");
 
     if(err) return console.log(err);

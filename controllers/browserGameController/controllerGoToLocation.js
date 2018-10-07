@@ -10,12 +10,12 @@ router.use(cookieParser());
 router.post('/doLocGo', function(req, res){
   if (req.cookies.uID) {
     mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-      client.db("locations").collection("locations").find({LOC_ID: parseInt( req.body.l.replace(/[^-0-9]/gi, '') )}).toArray(function(err, resultsLOC){
+      client.db("DarkWorld").collection("Locations").find({LOC_ID: parseInt( req.body.l.replace(/[^-0-9]/gi, '') )}).toArray(function(err, resultsLOC){
         console.log(resultsLOC);
 
         if(resultsLOC[0].close){
-          client.db("UsersData").collection("Session").find({c:req.body.aKey}).toArray(function(err, resultsSession){
-            client.db("GameProcess").collection("UserLocationsData").updateOne({ userID: resultsSession[0].b },{ $set: {userLocation: parseInt( req.body.l.replace(/[^-0-9]/gi, '') )}  });
+          client.db("DarkWorld").collection("Session").find({c:req.body.aKey}).toArray(function(err, resultsSession){
+            client.db("DarkWorld").collection("UserLocationsData").updateOne({ userID: resultsSession[0].b },{ $set: {userLocation: parseInt( req.body.l.replace(/[^-0-9]/gi, '') )}  });
           });
 
           var dnpc = [];

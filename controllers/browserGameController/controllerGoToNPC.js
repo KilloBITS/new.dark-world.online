@@ -11,7 +11,7 @@ router.post('/doNPCGo', function(req, res){
   if (req.cookies.uID) {
     mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
 
-        client.db("locations").collection("NPC_dialogs").find({ID: req.body.n }).toArray(function(err, resultsNPC){
+        client.db("DarkWorld").collection("NPC_dialogs").find({ID: req.body.n }).toArray(function(err, resultsNPC){
           console.log(resultsNPC)
           //Отправляем ответ
           try{

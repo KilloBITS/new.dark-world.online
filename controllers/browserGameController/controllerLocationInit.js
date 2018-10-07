@@ -10,14 +10,14 @@ router.use(cookieParser());
 router.post('/locInit', function(req, res){
   if (req.cookies.uID) {
     mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-      var GameProcess = client.db("GameProcess");
+      var GameProcess = client.db("DarkWorld");
       var collection = GameProcess.collection("UserLocationsData");
 
       if(err) return console.log(err);
 
       collection.find({userID:req.cookies.uID}).toArray(function(err, results){
         if(results[0] !== undefined){
-          client.db("locations").collection("locations").find({LOC_ID:results[0].userLocation}).toArray(function(err, resultsLOC){
+          client.db("DarkWorld").collection("Locations").find({LOC_ID:results[0].userLocation}).toArray(function(err, resultsLOC){
             var dnpc = [];
             var dloc = [];
             //получаем список НПС на локации

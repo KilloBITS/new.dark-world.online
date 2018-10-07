@@ -6,7 +6,7 @@ const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/', function(req, res, next){
   mongoClient.connect(url, function(err, client){
-      const db = client.db("news");
+      const db = client.db("DarkWorld");
       const collection = db.collection("newsGame");
 
       if(err) return console.log(err);
