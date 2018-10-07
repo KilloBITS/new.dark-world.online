@@ -1,7 +1,8 @@
 'use strict';
 var data = {
   ak: GlobalObj.GET_COOKIE('AuthKEY'),
-  ud: new Object()
+  ud: new Object(),
+  am: NaN
 }
 
 var Game = {
@@ -168,6 +169,7 @@ var Game = {
   clickMenu: function(){
     $(".BUTTON_MENU").click(function(){
       var index = $(".BUTTON_MENU").index(this);
+      data.am = index;
       $(".block_of_modal").fadeIn(150);
       $(".modaB_content").hide();
       $(".block_of_modal .modaB_content:eq("+index+")").show();
@@ -181,6 +183,7 @@ var Game = {
         case 5: var url = '/doClans';break;
         case 6: var url = '/doList';break;
       }
+
       let dou = {
         aKey: data.ak,
         n: data.ud.us.userDATA.nick
@@ -194,6 +197,13 @@ var Game = {
         Game.GlobalMessage({code: 450, author: "System", error: "Отказано в доступе!"}, 5000);
       });
 
+    });
+    $(".tabBtn").click(function(){
+      if(data.am === 1){
+          let i = $(".tabBtn").index(this);
+          $(".tabBtn").removeClass("tabActive");
+          $(".tabBtn:eq("+i+")").addClass("tabActive");
+      }
     });
   },
   loadDesign: function(t,s){
@@ -245,19 +255,15 @@ var Game = {
         $(".smiles_block").addClass("show")
       }
     });
-    $(document).click(function(e) {
 
+    $(document).click(function(e) {
       switch(e.target.className){
         case "users_mini_ava":Game.ContextMenu(0); break;
         default: Game.ContextMenu(-1);
       }
-      // Game.ContextMenu(-1);
-        // console.log(e.target.className);
-        // $('.ContextMenu').remove();
     });
-    // $("#users_mini_ava").click(function(){
-    //
-    // });
+
+
 
     if(screen.width > 800){
         setInterval(function () {

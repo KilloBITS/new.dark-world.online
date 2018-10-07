@@ -708,8 +708,15 @@ float: left;
 
 .to-index-btn{
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 0;
+  top: 0;
   z-index: 1;
   font-family: index;
+  background: url(../../../image/toback.png);
+  width: 200px;
+  height: 85px;
+  text-align: center;
+  line-height: 72px;
+  background-size: cover;
+  color: white;
 }
