@@ -61,7 +61,8 @@ app.listen(8000, function(){
   global.onlineUsers = [];
 
   const mongoClient = require("mongodb").MongoClient;
-  const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+  // const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+  const url = "mongodb://134.249.117.218:27017/"; //url from mongoDB dataBase
 
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
     var GameData = client.db("DarkWorld");
