@@ -51,6 +51,9 @@ app.post('/doLocGo', doLocGo);
 const doNPCGo = require('./controllers/browserGameController/controllerGoToNPC');
 app.post('/doNPCGo', doNPCGo);
 
+const doNPCdlg = require('./controllers/browserGameController/controllerGoToNPC');
+app.post('/doNPCdlg', doNPCdlg);
+
 const chat = require('./controllers/browserGameController/controllerChat');
 app.post('/chat', chat);
 
@@ -62,7 +65,7 @@ app.listen(8000, function(){
 
   const mongoClient = require("mongodb").MongoClient;
   // const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
-  const url = "mongodb://134.249.117.218:27017/"; //url from mongoDB dataBase
+  const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
     var GameData = client.db("DarkWorld");
@@ -79,6 +82,8 @@ app.listen(8000, function(){
       global.NPC = results;
     });
 
+    console.log(global.LOCATION);
+    console.log(global.NPC);
   });
 
   console.warn('started server Dark World from port: 8000');

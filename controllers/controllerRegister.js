@@ -31,6 +31,7 @@ var registrations = function(req, res, next)  {
   // res.send('{"code":500, "message":"Регистрация временно недоступна, следите за новостями!"}');
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
     var db = client.db("DarkWorld");
+    var items = client.db("ITEMS");
     var collection = db.collection("Users");
     if(err) return console.log(err);
 
@@ -90,6 +91,7 @@ var registrations = function(req, res, next)  {
           client.db("DarkWorld").collection("UserLocationsData").insertOne(NewUserGame);
         });
 
+        items.createCollection(userNEW.nick, { capped : true, size : 5242880, max : 5000 } )
         res.send('{"code":500, "message":"Вы успешно зарегистрированы.<br>Сообщение с кодом подтверждения отправленно вам на електронную почту!"}');
 
           var GameData = client.db("DarkWorld");

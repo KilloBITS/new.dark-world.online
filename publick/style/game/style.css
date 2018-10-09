@@ -560,9 +560,9 @@ background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiB
   transform: translate(-50%);
   background: rgba(0, 0, 0, 0.4) url(../../../image/ack-texture.png);
   color: white;
-  padding: 30px 0 59px 25px;
+  padding: 30px 34px 50px 38px;
   border-radius: 5px;
-  width: calc(100% - 126px);
+  width: calc(100% - 100px);
   z-index: 1;
   border-top: 1px solid black;
 }
@@ -570,15 +570,16 @@ background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiB
 #LocNameGlobal{
   position: absolute;
   left: 50%;
-  top: 44px;
+  top: 38px;
   z-index: 8;
   font-family: index;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.59);
+  background: rgba(0, 0, 0, 0.74);
   color: white;
-  padding: 5px 25px;
-  border-radius: 5px;
+  padding: 3px 19px;
+  border-radius: 3px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .load{
@@ -1408,17 +1409,18 @@ border-radius: 3px 0 5px 0;
 
 .block_of_modal{
   position: absolute;
-      z-index: 11;
-      width: 660px;
-      height: 480px;
-      background: red;
-      left: 200px;
-      top: 62px;
-      border-radius: 0 0 0px 10px;
-      background: url(../../../image/backgrounds/back3.jpg);
-      border: 2px solid black;
-      display: none;
-      border-right: 0;
+  z-index: 11;
+  width: 660px;
+  height: 480px;
+  background: red;
+  left: 200px;
+  top: 60px;
+  border-radius: 0 0 0px 10px;
+  background: url(../../../image/backgrounds/back2.jpg);
+  border: 1px solid black;
+  display: none;
+  border-right: 0;
+  border-top: 0;
 }
 
 .modaB_content{
@@ -1430,20 +1432,10 @@ border-radius: 3px 0 5px 0;
   left: 50%;
   top: 50%;
   border-radius: 8px;
-  border: 2px solid black;
-  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.33);
+  border: 1px solid black;
+  box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.9);
   display: none;
 }
-
-.BM_texture{
-  position: absolute;
-  width: calc(100% + 31px);
-  height: 50px;
-  background-image: url(../../../image/a/aaas3.png);
-  background-size: contain;
-  bottom: -50px;
-}
-
 
 /* game lumen */
 .head-lumen {
@@ -1539,11 +1531,11 @@ border-radius: 3px 0 5px 0;
 .tabs_mod_cont{
   width: 38px;
   position: absolute;
-  background: url(../../../image/backgrounds/back3.jpg);
-  right: -50px;
-  top: -12px;
-  height: calc(100% + 18px);
-  border: 2px solid black;
+  background: url(../../../image/backgrounds/back2.jpg);
+  right: -49px;
+  top: -11px;
+  height: calc(100% + 20px);
+  border: 1px solid black;
   border-left: 0;
   border-radius: 0 5px 5px 0;
 }
@@ -1623,14 +1615,110 @@ border-radius: 3px 0 5px 0;
   position: relative;
   width: 100%;
   height: 100%;
-  background: #66339900;
+  background: rgba(0, 0, 0, 0.48);
+  overflow: scroll;
+  overflow-x: hidden;
+  border-radius: 5px;
 }
 
 .object{
   width: 75px;
   height: 75px;
-  background: rgba(255, 255, 255, 0.11);
+  background: url(../../../image/item_back.png);
   display: inline-block;
   margin: 12px 1px 3px 11px;
   border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.object:hover{
+  background-color: rgba(183, 24, 24, 0.5);
+  transition: 0.2s;
+}
+
+.obj_len{
+  position: absolute;
+  right: 0px;
+  color: black;
+  font-family: index;
+  font-size: 12px;
+  /* text-shadow: 1px 1px 1px red; */
+  top: -15px;
+  opacity: 0.4;
+}
+.obj_image{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.obj_span{
+  display: none;
+  position: absolute;
+  bottom: -28px;
+  background: black;
+  color: white;
+  padding: 3px 10px 3px 10px;
+  font-size: 12px;
+  font-family: index;
+  border-radius: 3px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  white-space: pre;
+  z-index: 1;
+}
+
+.object:hover .obj_span{
+  display: block;
+}
+
+.object:hover .obj_len{
+    opacity: 1;
+    text-shadow: 1px 1px 1px red;
+}
+
+.obj_span:before{
+  top: -20px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: rgb(0, 0, 0);
+  border-width: 11px;
+  left: 50%;
+  margin-left: -11px;
+}
+
+
+.TBR,.TBL{
+  width: 75px;
+  height: 480px;
+  top: 0;
+}
+
+.TBL{
+  background-image: url(../../../image/TBL.png);
+  position: absolute;
+  left: -76px;
+}
+.TBR{
+  background-image: url(../../../image/TBR.png);
+  position: absolute;
+  left: 39px;
+}
+
+.pustoy{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: rgba(255, 0, 0, 0.52);
+  transform: translate(-50%, -50%);
+  font-size: 17px;
+  font-family: index;
+  text-align: center;
 }

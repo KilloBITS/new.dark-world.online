@@ -15,7 +15,7 @@ router.post('/locInit', function(req, res){
 
       if(err) return console.log(err);
 
-      collection.find({userID:req.cookies.uID}).toArray(function(err, results){
+      collection.find({userID: req.cookies.uID }).toArray(function(err, results){
         if(results[0] !== undefined){
           client.db("DarkWorld").collection("Locations").find({LOC_ID:results[0].userLocation}).toArray(function(err, resultsLOC){
             var dnpc = [];

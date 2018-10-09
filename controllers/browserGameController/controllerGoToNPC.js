@@ -28,4 +28,29 @@ router.post('/doNPCGo', function(req, res){
   }
 });
 
+router.post('/doNPCdlg', function(req, res){
+console.log(req.body);
+mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
+
+    client.db("DarkWorld").collection("NPC_dialogs").find({ID: req.body.n[0] }).toArray(function(err, resultsNPC){
+      // console.log(resultsNPC)
+      let nuDLG = parseInt(req.body.n[1].replace(/[^-0-9]/gim,''))+1;
+      //Отправляем ответ
+      console.log(resultsNPC[0]["d"+(nuDLG+1)]);
+      console.log(resultsNPC[0]["o"+(nuDLG+1)]);
+      // try{
+      //   res.send({code:500, art: resultsNPC[0].art ,dlg: resultsNPC[0]["d"+(nuDLG+1)], otv: resultsNPC[0]["o"+(nuDLG+1)]});
+      // }catch(e){
+      //   console.log(e)
+      //   res.send({code:450, error: "NPC dialog ERROR :(", author: 'SYSTEM'});
+      // }
+
+    });
+
+
+});
+
+res.send('500')
+});
+
 module.exports = router;

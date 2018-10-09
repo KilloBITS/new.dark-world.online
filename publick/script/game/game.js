@@ -112,6 +112,9 @@ var Game = {
   otvetClick: function(npc, oid){
     console.log(npc);
     console.log(oid);
+    $.post("/doNPCdlg",{aKey: data.ak, n: [npc, oid]}, (d) => {
+      console.log(d);
+    });
   },
   goLoc: function(e){
     $(".NPC_DIALOGS").hide(150);
@@ -171,6 +174,7 @@ var Game = {
       var index = $(".BUTTON_MENU").index(this);
       data.am = index;
       $(".block_of_modal").fadeIn(150);
+      $(".modal_preload").fadeIn(300);
       $(".modaB_content").hide();
       $(".block_of_modal .modaB_content:eq("+index+")").show();
 
@@ -190,7 +194,52 @@ var Game = {
       };
 
       $.post(url, {d:dou}, function(res){
-        alert("good");
+        if(index === 1){
+          $('.object,.pustoy').remove();
+          for(let itemLen = 0; itemLen < res.items.length; itemLen++){
+            var objNC = document.createElement('div');
+            objNC.className = 'object';
+            $(".div_MK").append(objNC);
+
+            if(parseInt(res.items[itemLen].itemLengthUser) >= 2){
+              var obj_len = document.createElement('div');
+              obj_len.innerHTML = res.items[itemLen].itemLengthUser;
+              obj_len.className = 'obj_len';
+              $(".object:eq("+itemLen+")").append(obj_len);
+            }
+
+            var PassportType = '';
+            if(res.items[itemLen].Item_ID === "2"){
+              if(data.ud.us.userDATA.sex === 'boy'){
+                PassportType = 'b';
+                console.log(itemLen+ ' CYKA')
+              }else{
+                PassportType = 'g';
+              }
+            }
+
+            var obj_image = document.createElement('div');
+            obj_image.style.backgroundImage = "url(../../../data/items/" + res.items[itemLen].Item_ID + PassportType + ".png)";
+            obj_image.className = 'obj_image';
+
+            var obj_span = document.createElement('span');
+            obj_span.innerHTML = res.items[itemLen].Item_name;
+            obj_span.className = 'obj_span';
+
+
+            $(".object:eq("+itemLen+")").append(obj_image);
+            $(".object:eq("+itemLen+")").append(obj_span);
+          }
+
+          if(res.items.length === 0){
+            var pustoy = document.createElement('div');
+            pustoy.innerHTML = 'У ваc нет ниодного предмета :( <br> Соберитесь ато даже бомжи вам сочувствуют... <br><br> <a href="#">Справка</a>';
+            pustoy.className = 'pustoy';
+            $(".div_MK").append(pustoy);
+
+          }
+          $(".modal_preload").fadeOut(300);
+        }
       }).fail(function() {
         $(".block_of_modal").hide();
         $(".modaB_content").hide();
@@ -226,8 +275,6 @@ var Game = {
       return rand;
   },
   ContextMenu: function(type){
-
-
     $('.ContextMenu').remove();
 
     if(type === 0){
@@ -263,24 +310,22 @@ var Game = {
       }
     });
 
-
-
     if(screen.width > 800){
-        setInterval(function () {
-            var blinkTime = Game.randomInteger(1, 15);
-            if (blinkTime > 12) {
-                $(".lum-r .light").css({
-                    "box-shadow": "none",
-                    "background": "rgba(83, 86, 55, 0.78)"
-                });
-            } else {
-                $(".lum-r .light").css({
-                    "box-shadow": "rgba(255, 255, 0, 1) 0px 20px 140px 32px",
-                    "background": "rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png)",
-                    "background-size":"185px"
-                });
-            }
-        }, 80);
+        // setInterval(function () {
+        //     var blinkTime = Game.randomInteger(1, 15);
+        //     if (blinkTime > 12) {
+        //         $(".lum-r .light").css({
+        //             "box-shadow": "none",
+        //             "background": "rgba(83, 86, 55, 0.78)"
+        //         });
+        //     } else {
+        //         $(".lum-r .light").css({
+        //             "box-shadow": "rgba(255, 255, 0, 1) 0px 20px 140px 32px",
+        //             "background": "rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png)",
+        //             "background-size":"185px"
+        //         });
+        //     }
+        // }, 80);
     }
   },
   parallax: function(){
