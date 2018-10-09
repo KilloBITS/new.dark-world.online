@@ -114,6 +114,18 @@ var Game = {
     console.log(oid);
     $.post("/doNPCdlg",{aKey: data.ak, n: [npc, oid]}, (d) => {
       console.log(d);
+        $(".NPC_OTVET span").remove();
+        $(".NPC_TEXT").html(d.dlg);
+        $(".NPC_OTVET").html('');
+        for(let ni = 0; ni < d.otv.split(';').length; ni++){
+          var span = document.createElement('span');
+          span.innerHTML = d.otv.split(';')[ni];
+          span.id = "OTV_"+ni;
+          span.onclick = function(){
+            Game.otvetClick(e, "OTV_"+ni);
+          };
+          $(".NPC_OTVET").append(span);
+        }
     });
   },
   goLoc: function(e){

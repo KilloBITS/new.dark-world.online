@@ -38,19 +38,19 @@ mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
       //Отправляем ответ
       console.log(resultsNPC[0]["d"+(nuDLG+1)]);
       console.log(resultsNPC[0]["o"+(nuDLG+1)]);
-      // try{
-      //   res.send({code:500, art: resultsNPC[0].art ,dlg: resultsNPC[0]["d"+(nuDLG+1)], otv: resultsNPC[0]["o"+(nuDLG+1)]});
-      // }catch(e){
-      //   console.log(e)
-      //   res.send({code:450, error: "NPC dialog ERROR :(", author: 'SYSTEM'});
-      // }
+      try{
+        res.send({code:500, art: resultsNPC[0].art ,dlg: resultsNPC[0]["d"+(nuDLG+1)], otv: resultsNPC[0]["o"+(nuDLG+1)]});
+      }catch(e){
+        console.log(e)
+        res.send({code:450, error: "NPC dialog ERROR :(", author: 'SYSTEM'});
+      }
 
     });
 
 
 });
 
-res.send('500')
+// res.send('500')
 });
 
 module.exports = router;
