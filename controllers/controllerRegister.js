@@ -109,7 +109,7 @@ var registrations = function(req, res, next)  {
           });
 
       }
-      // client.close();
+      client.close();
     });
   });
 };

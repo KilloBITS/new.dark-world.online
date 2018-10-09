@@ -8,7 +8,6 @@ const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 router.use(cookieParser());
 
 router.post('/doItems', function(req, res){
-  console.log(req.body)
   mongoClient.connect(url, function(err, client){
     var db = client.db("ITEMS");
     var db2 = client.db("DarkWorld");
@@ -24,12 +23,8 @@ router.post('/doItems', function(req, res){
         for(let i = 0; i < ItemRes.length; i++){
             collection2.find({Item_ID: ItemRes[i].items_id}).toArray(function(err, resss){
               resss[0].itemLengthUser = ItemRes[i].items_len;
-
-              console.log(resss[0].Item_name)
               newItems.push(resss[0]);
-
               if(newItems.length >= ItemRes.length){
-                console.log('возвращаем ответ')
                 res.send({code:500, items: newItems});
               }
             });
@@ -37,8 +32,8 @@ router.post('/doItems', function(req, res){
       }else{
         res.send({code:500, items: []});
       }
-
     });
+    client.close();
   });
 });
 

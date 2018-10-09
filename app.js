@@ -81,9 +81,6 @@ app.listen(8000, function(){
     npc.find().toArray(function(err, results){
       global.NPC = results;
     });
-
-    console.log(global.LOCATION);
-    console.log(global.NPC);
   });
 
   console.warn('started server Dark World from port: 8000');
