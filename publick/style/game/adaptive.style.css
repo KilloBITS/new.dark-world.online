@@ -67,4 +67,37 @@
 #LocInfoGlobal{
   display: none;
 }
+.chat-block {
+    width: 100%;
+    height: calc(50% - 35px);
+    display: inline-block;
+    position: fixed;
+    z-index: 999999999999999;
+    left: 0;
+    background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
+    height: calc(100% - 2px);
+    top: 0;
+}
+.chat, .user-li {
+    display: inline-block;
+    height: calc(100% - 8px);
+    background: rgba(0, 0, 0, 0.4);
+    margin: 5px;
+    border-radius: 7px;
+    box-shadow: inset 0px 0px 10px 3px;
+    position: relative;
+}
+#chat {
+    width: calc(100% - 10px);
+    bottom: 0;
+    position: absolute;
+}
+#user-li {
+    width: calc(310px);
+    display: none;
+}
+
+.hide_top{
+  z-index: 0;
+}
 }
