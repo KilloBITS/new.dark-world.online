@@ -25,7 +25,11 @@ var IndexInit = {
       $('.auth-block').hide();
       IndexInit.USER = JSON.parse(data);
 
-      $(".avatara:eq(0)").css({"background-image":"url(data/users/avatar/"+IndexInit.USER.nick+".jpg)"})
+      var img = new Image();
+      img.src = 'ata/users/avatar/"+IndexInit.USER.nick+".jpg';
+      img.onload = function(){$(".avatara:eq(0)").css({"background-image":"url(ata/users/avatar/"+IndexInit.USER.nick+".jpg)", "background-size": "contain"});};
+      img.onerror = function(){$(".avatara:eq(0)").css({"background-image":"url(/data/users/avatar/nophoto.jpg)", "background-size": "contain"});};
+
       $(".nick-name-block").html('<span>'+GlobalObj.PARSE_RANC(IndexInit.USER.rank)+'</span>'+IndexInit.USER.nick);
       $(".text-rank").html(GlobalObj.PARSE_REPUTATION(parseInt(IndexInit.USER.repa)));
       GlobalObj.SET_STARS(parseInt(IndexInit.USER.repa), '.stars-block');

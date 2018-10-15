@@ -158,9 +158,9 @@ var Game = {
         $(".NPC_OTVET span").remove();
         $(".NPC_TITLE").html(name)
         $(".NPC_TEXT").html(d.dlg);
-        for(let ni = 0; ni < d.otv.split(',').length; ni++){
+        for(let ni = 0; ni < d.otv.split(';').length; ni++){
           var span = document.createElement('span');
-          span.innerHTML = d.otv.split(',')[ni];
+          span.innerHTML = d.otv.split(';')[ni];
           span.id = "OTV_"+ni;
           span.onclick = function(){
             Game.otvetClick(e, "OTV_"+ni);
